@@ -1,39 +1,47 @@
-# Name:
-# Description: Script to read HDF5 files and testing
+#------------------------------------------------------------------------------
+# Script name: run.py
+# Description: Script to read HDF5 files and testing.
+# Creation date: 28/03/2020
+# Author: avelezd
+#------------------------------------------------------------------------------
 
-# import numpy
-import h5py
-import sys, getopt
 # import pdb
+# import torch
+# import numpy
+# import h5py
+import sys, getopt
+import logging
 
-import torch
+import HDF5Reader
 
-class Snake:
-    pass
+from utils.constants import _LOG_NAME_, _LOG_FORMAT_, _LOG_INFO_FILENAME_, _LOG_FILEPATH_
 
+# Create logger
+logger = logging.getLogger(_LOG_NAME_)
+logger.setLevel(logging.DEBUG)
 
+# File Handler which logs even degug messages
+fh = logging.FileHandler(_LOG_FILEPATH_ + _LOG_INFO_FILENAME_)
+fh.setLevel(logging.INFO)
 
-def getfileproperties(filepath):
-    print('hello world from script!')
+# Console Handler with higher log level
+ch = logging.StreamHandler()
+ch.setLevel(logging.ERROR)
 
-    # hdf5filepath = '/home/avelezd/code/02_thesis/01_datasets/01_iarai_berlin/Berlin/Berlin_training/20180220_100m_bins.h5'
+# Create formater and add it to handlers
+formatter = logging.Formatter(_LOG_FORMAT_)
+fh.setFormatter(formatter)
+ch.setFormatter(formatter)
 
-    # print(filepath)
-    # h5py.run_tests()
-    f = h5py.File(filepath, 'r')
-    # ltkeys = list(f.keys())
-    
-    for filekey in list(f.keys()):
-        print('key: %s'%filekey)
-    
-        dset = f[filekey]
-        print(' file shape: %s \n file type: %s'%(dset.shape, dset.dtype))
-        print(dset[100, 100])
-       
-# =================================================================================
+# Add Handlers to the logger
+logger.addHandler(fh)
+logger.addHandler(ch)
+
 
 def main(argv):
-    
+
+    logger.info('BOF')
+
     hdf5filepath = 'datasets/input/20180622_100m_bins.h5'
     inputfile =  ''
     outputfile = ''
@@ -42,6 +50,8 @@ def main(argv):
         opts, args = getopt.getopt(argv,"hi:o:",["ifile=","ofile="])
     except getopt.GetoptError:
        print ('script_name.py -i <inputfile> -o <outputfile>')
+       logger.info('Script parameters error')
+       logger.info('EOF')
        sys.exit(2)
  
     for opt, arg in opts:
@@ -55,14 +65,16 @@ def main(argv):
     
     if not inputfile:
         inputfile = hdf5filepath
-     
-    getfileproperties(inputfile)
-
+    
     # breakpoint()
-    # print('Input file is "', inputfile)
-    # print('Output file is "', outputfile)
-
-# =================================================================================
+    h5r = HDF5Reader.HDF5Reader(inputfile)
+    h5r.getfileproperties()
+    
+    # breakpoint()
+    logger.info('Input: %s"'%inputfile)
+    logger.info('Output: %s"'%outputfile)
+    
+    logger.info('EOF')
 
 
 if __name__ == "__main__":

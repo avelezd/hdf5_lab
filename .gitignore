@@ -1,0 +1,13 @@
+# source: https://github.com/github/gitignore/blob/master/Python.gitignore
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# vim stuffs
+*.swp
+*.swo
+
+# Do not share your logs
+*.log
+
+# Neither your data raw
+data_raw/
