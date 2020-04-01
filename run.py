@@ -12,12 +12,12 @@
 import sys, getopt
 import logging
 
-import HDF5Reader
+import HDF5Reader as h5r
 
 from utils.constants import _LOG_NAME_, _LOG_FORMAT_, _LOG_INFO_FILENAME_, _LOG_FILEPATH_
 
 # Create logger
-logger = logging.getLogger(_LOG_NAME_)
+logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
 # File Handler which logs even degug messages
@@ -38,10 +38,19 @@ logger.addHandler(fh)
 logger.addHandler(ch)
 
 
-def main(argv):
+def main(inputfile):
 
     logger.info('BOF')
 
+    # breakpoint()
+    h5obj = h5r.HDF5Reader(inputfile)
+    h5obj.getfileproperties()
+    # breakpoint()
+
+    logger.info('EOF')
+
+
+if __name__ == "__main__":
     hdf5filepath = 'datasets/input/20180622_100m_bins.h5'
     inputfile =  ''
     outputfile = ''
@@ -65,18 +74,4 @@ def main(argv):
     
     if not inputfile:
         inputfile = hdf5filepath
-    
-    # breakpoint()
-    h5r = HDF5Reader.HDF5Reader(inputfile)
-    h5r.getfileproperties()
-    
-    # breakpoint()
-    logger.info('Input: %s"'%inputfile)
-    logger.info('Output: %s"'%outputfile)
-    
-    logger.info('EOF')
-
-
-if __name__ == "__main__":
-    main(sys.argv[1:])
 

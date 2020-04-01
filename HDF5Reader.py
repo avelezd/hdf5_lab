@@ -3,16 +3,16 @@ import h5py
 
 class HDF5Reader:
  
-    # logger = logging.getLogger(__name__)
     __filename__ = ''
 
     def __init__(self, inputfilename):
+        
         self.logger = logging.getLogger(__name__)
-        #__filename__ = None
+        
         self.__filename__ = inputfilename
-        self.logger.info(inputfilename)
         self.logger.info('HDF5File Instance created')
 
+    
     def getfileproperties(self):
         '''Get the properties of a HDF5 file'''
     
