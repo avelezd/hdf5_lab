@@ -11,3 +11,6 @@ __pycache__/
 
 # Neither your data raw
 data_raw/
+
+# python debbuger
+*.pyc
