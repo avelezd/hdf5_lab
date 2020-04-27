@@ -13,13 +13,13 @@ def looking4activity(hdf5str):
     log.info(type(hdf5str))
     
     idxb=idxh=idxw=idxc=0
-    breakpoint() 
+    # breakpoint() 
     for block5m in hdf5str[0]:
         for heightpx in block5m:
             for widthpx in heightpx:
                 for channelpx in widthpx:
                     log.info('position block[%s] h[%s] w[%s] c[%s]'%(idxb,idxh,idxw,idxc))
-                    breakpoint()
+                    # breakpoint()
                     
                     if channelpx > 0:
                         log.info(channelpx)
@@ -39,14 +39,15 @@ def looking4activity(hdf5str):
         idxb+=1
         idxh=0
 
-        breakpoint() 
+        # breakpoint() 
 
 
 if __name__ == "__main__":
 
     log.info('BOF')
 
-    f = h5py.File('tstfolder/20180809_100m_bins.h5', 'r')
+    # f = h5py.File('tstfolder/20180809_100m_bins.h5', 'r')
+    f = h5py.File('../datasets/input/experiments/databenchmark/reduce/Berlin/Berlin_test/20180102_100m_bins.h5', 'r')
     keys = list(f.keys())
     log.info('File load OK')
         
