@@ -7,9 +7,10 @@ Each HDF5 file contains enough information to generate a map of the traffc statu
 
 
 ## To do's:
-- [ ] Create a GIf or Video concatenating all the images in a file.
-- [ ] Save images automatically
-- [x] ~~Plot the data of a frame in a HDF5 file~~
+- [ ] Test other graphic libraries.
+- [x] ~~Create a GIf or Video concatenating all the images in a file.~~
+- [x] ~~Save images automatically.~~
+- [x] ~~Plot the data of a frame in a HDF5 file.~~
 - [x] ~~Load an HDF5 file and extract metadata.~~
 - [x] ~~Add custom logger using logging module.~~
 - [x] ~~Create basic unittests to load and read HDF5 files.~~
